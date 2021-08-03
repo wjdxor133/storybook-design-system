@@ -2,8 +2,9 @@
 /** @jsx jsx */
 
 import { jsx, css } from "@emotion/react";
-import Button from "./Button";
-import { withKnobs, text, boolean, select } from "@storybook/addon-knobs";
+import { Meta, Story } from "@storybook/react";
+import Button, { ButtonProps } from "./Button";
+// import { withKnobs, text, boolean, select } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import Icon from "../Icon/Icon";
@@ -11,48 +12,83 @@ import Icon from "../Icon/Icon";
 export default {
   title: "components/Button",
   component: Button,
-  decorators: [withKnobs],
+  // decorators: [
+  //   withKnobs,
+  //   // (story) => (
+  //   //   <div style={{ display: "flex", justifyContent: "center" }}>{story()}</div>
+  //   // ),
+  // ],
+  // args: {
+  //   children: "Button", // 버튼 스토리북 모든 버튼의 텍스트 설정
+  // },
+  argTypes: {
+    theme: {
+      control: {
+        type: "select",
+        options: ["primary", "secondary", "tertiary"],
+      },
+    },
+  },
+} as Meta;
+
+// export const button = () => {
+//   const label = text("children", "BUTTON");
+//   const size = select("size", ["small", "medium", "big"], "medium");
+//   const theme = select(
+//     "theme",
+//     ["primary", "secondary", "tertiary"],
+//     "primary"
+//   );
+//   const disabled = boolean("disabled", false);
+//   const width = text("width", "");
+
+//   return (
+//     <Button
+//       size={size}
+//       theme={theme}
+//       disabled={disabled}
+//       width={width}
+//       onClick={action("onClick")}
+//     >
+//       {label}
+//     </Button>
+//   );
+// };
+
+// button.story = {
+//   name: "Default",
+// };
+
+const Template: Story<ButtonProps> = (args) => <Button {...args} />;
+
+export const primaryButton = Template.bind({});
+primaryButton.args = {
+  children: "PRIMARY",
 };
 
-export const button = () => {
-  const label = text("children", "BUTTON");
-  const size = select("size", ["small", "medium", "big"], "medium");
-  const theme = select(
-    "theme",
-    ["primary", "secondary", "tertiary"],
-    "primary"
-  );
-  const disabled = boolean("disabled", false);
-  const width = text("width", "");
-
-  return (
-    <Button
-      size={size}
-      theme={theme}
-      disabled={disabled}
-      width={width}
-      onClick={action("onClick")}
-    >
-      {label}
-    </Button>
-  );
+export const secondaryButton = Template.bind({});
+secondaryButton.args = {
+  theme: "secondary",
+  children: "SECONDARY",
 };
 
-button.story = {
-  name: "Default",
+export const tertiaryButton = Template.bind({});
+tertiaryButton.args = {
+  theme: "tertiary",
+  children: "TERTIARY",
 };
 
-export const primaryButton = () => {
-  return <Button>PRIMARY</Button>;
-};
+// export const primaryButton = () => {
+//   return <Button>PRIMARY</Button>;
+// };
 
-export const secondaryButton = () => {
-  return <Button theme="secondary">SECONDARY</Button>;
-};
+// export const secondaryButton = () => {
+//   return <Button theme="secondary">SECONDARY</Button>;
+// };
 
-export const tertiaryButton = () => {
-  return <Button theme="tertiary">TERTIARY</Button>;
-};
+// export const tertiaryButton = () => {
+//   return <Button theme="tertiary">TERTIARY</Button>;
+// };
 
 const buttonWrapper = css`
   .description {

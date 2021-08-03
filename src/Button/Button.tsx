@@ -3,7 +3,7 @@
 
 import { jsx, css } from "@emotion/react";
 
-type ButtonProps = {
+export type ButtonProps = {
   /** 버튼 안의 내용 */
   children: React.ReactNode; // React.ReactNode 는 children 을 위한 타입을 지정 할 때 사용하는 타입
   /** 클릭했을 때 호출할 함수 */
